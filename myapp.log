@@ -1,0 +1,568 @@
+2024-04-13 19:01:32.786  INFO 9144 --- [main] dev.vorstuu.VorstuuApplication           : Starting VorstuuApplication using Java 1.8.0_402 on maxim with PID 9144 (D:\prod\angular_spring_project\vorstuu\build\classes\java\main started by maxim in D:\prod\angular_spring_project\vorstuu)
+2024-04-13 19:01:32.788 DEBUG 9144 --- [main] dev.vorstuu.VorstuuApplication           : Running with Spring Boot v2.7.8, Spring v5.3.25
+2024-04-13 19:01:32.789  INFO 9144 --- [main] dev.vorstuu.VorstuuApplication           : No active profile set, falling back to 1 default profile: "default"
+2024-04-13 19:01:33.349  INFO 9144 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-04-13 19:01:33.391  INFO 9144 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 34 ms. Found 2 JPA repository interfaces.
+2024-04-13 19:01:33.862  INFO 9144 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2024-04-13 19:01:33.869  INFO 9144 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-04-13 19:01:33.869  INFO 9144 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2024-04-13 19:01:33.954  INFO 9144 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-04-13 19:01:33.954  INFO 9144 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1127 ms
+2024-04-13 19:01:34.172  INFO 9144 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-04-13 19:01:34.206  INFO 9144 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.14.Final
+2024-04-13 19:01:34.317  INFO 9144 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-04-13 19:01:34.446  INFO 9144 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-04-13 19:01:34.589  INFO 9144 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-04-13 19:01:34.606  INFO 9144 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2024-04-13 19:01:35.017  INFO 9144 --- [main] org.hibernate.tuple.PojoInstantiator     : HHH000182: No default (no-argument) constructor for class: dev.vorstuu.entity.Password (class must be instantiated by Interceptor)
+2024-04-13 19:01:35.116 DEBUG 9144 --- [main] org.hibernate.SQL                        : 
+    
+    alter table if exists users 
+       drop constraint if exists FKqw3s5v74dceunv85ihgp26ag5
+2024-04-13 19:01:35.144 DEBUG 9144 --- [main] org.hibernate.SQL                        : 
+    
+    drop table if exists password cascade
+2024-04-13 19:01:35.160 DEBUG 9144 --- [main] org.hibernate.SQL                        : 
+    
+    drop table if exists students cascade
+2024-04-13 19:01:35.165 DEBUG 9144 --- [main] org.hibernate.SQL                        : 
+    
+    drop table if exists users cascade
+2024-04-13 19:01:35.169 DEBUG 9144 --- [main] org.hibernate.SQL                        : 
+    
+    drop sequence if exists hibernate_sequence
+2024-04-13 19:01:35.208 DEBUG 9144 --- [main] org.hibernate.SQL                        : create sequence hibernate_sequence start 1 increment 1
+2024-04-13 19:01:35.229 DEBUG 9144 --- [main] org.hibernate.SQL                        : 
+    
+    create table password (
+       id int8 not null,
+        password varchar(255),
+        primary key (id)
+    )
+2024-04-13 19:01:35.329 DEBUG 9144 --- [main] org.hibernate.SQL                        : 
+    
+    create table students (
+       id int8 not null,
+        fio varchar(255),
+        group_of_students varchar(255),
+        phone_number varchar(255),
+        primary key (id)
+    )
+2024-04-13 19:01:35.539 DEBUG 9144 --- [main] org.hibernate.SQL                        : 
+    
+    create table users (
+       id int8 not null,
+        enable boolean not null,
+        role varchar(255),
+        username varchar(255),
+        password_id int8 not null,
+        primary key (id)
+    )
+2024-04-13 19:01:35.626 DEBUG 9144 --- [main] org.hibernate.SQL                        : 
+    
+    alter table if exists users 
+       add constraint FKqw3s5v74dceunv85ihgp26ag5 
+       foreign key (password_id) 
+       references password
+2024-04-13 19:01:35.643  INFO 9144 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-04-13 19:01:35.658  INFO 9144 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-04-13 19:01:36.160  INFO 9144 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4601047, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@25e8e59, org.springframework.security.web.context.SecurityContextPersistenceFilter@bb8ead8, org.springframework.security.web.header.HeaderWriterFilter@120350eb, org.springframework.security.web.authentication.logout.LogoutFilter@5a3cf878, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@5d5d3a5c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6e807e2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@203b953c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3a0896b3, org.springframework.security.web.session.SessionManagementFilter@3c16528d, org.springframework.security.web.access.ExceptionTranslationFilter@edb83f8, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5b332439]
+2024-04-13 19:01:36.215  WARN 9144 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-04-13 19:01:36.892  INFO 9144 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2024-04-13 19:01:36.900  INFO 9144 --- [main] dev.vorstuu.VorstuuApplication           : Started VorstuuApplication in 4.47 seconds (JVM running for 5.272)
+2024-04-13 19:01:36.918 DEBUG 9144 --- [main] org.hibernate.SQL                        : 
+    select
+        nextval ('hibernate_sequence')
+2024-04-13 19:01:36.944 DEBUG 9144 --- [main] org.hibernate.SQL                        : 
+    insert 
+    into
+        students
+        (fio, group_of_students, phone_number, id) 
+    values
+        (?, ?, ?, ?)
+2024-04-13 19:01:36.946 TRACE 9144 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [fio1]
+2024-04-13 19:01:36.946 TRACE 9144 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [VARCHAR] - [group1]
+2024-04-13 19:01:36.946 TRACE 9144 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [+7]
+2024-04-13 19:01:36.947 TRACE 9144 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [1]
+2024-04-13 19:01:36.953 DEBUG 9144 --- [main] org.hibernate.SQL                        : 
+    select
+        nextval ('hibernate_sequence')
+2024-04-13 19:01:36.953 DEBUG 9144 --- [main] org.hibernate.SQL                        : 
+    insert 
+    into
+        students
+        (fio, group_of_students, phone_number, id) 
+    values
+        (?, ?, ?, ?)
+2024-04-13 19:01:36.953 TRACE 9144 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [fio2]
+2024-04-13 19:01:36.954 TRACE 9144 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [VARCHAR] - [group2]
+2024-04-13 19:01:36.954 TRACE 9144 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [+71]
+2024-04-13 19:01:36.954 TRACE 9144 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [2]
+2024-04-13 19:01:36.955 DEBUG 9144 --- [main] org.hibernate.SQL                        : 
+    select
+        nextval ('hibernate_sequence')
+2024-04-13 19:01:36.956 DEBUG 9144 --- [main] org.hibernate.SQL                        : 
+    insert 
+    into
+        students
+        (fio, group_of_students, phone_number, id) 
+    values
+        (?, ?, ?, ?)
+2024-04-13 19:01:36.956 TRACE 9144 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [fio3]
+2024-04-13 19:01:36.956 TRACE 9144 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [VARCHAR] - [group3]
+2024-04-13 19:01:36.956 TRACE 9144 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [+72]
+2024-04-13 19:01:36.956 TRACE 9144 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [3]
+2024-04-13 19:01:37.040 DEBUG 9144 --- [main] org.hibernate.SQL                        : 
+    select
+        nextval ('hibernate_sequence')
+2024-04-13 19:01:37.041 DEBUG 9144 --- [main] org.hibernate.SQL                        : 
+    select
+        nextval ('hibernate_sequence')
+2024-04-13 19:01:37.042 DEBUG 9144 --- [main] org.hibernate.SQL                        : 
+    insert 
+    into
+        password
+        (password, id) 
+    values
+        (?, ?)
+2024-04-13 19:01:37.043 TRACE 9144 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [$2a$10$VcjpGB0ut5MBc4CSN3whDuC/saAlcoEQuzy5/LgLGcWB7qMyQsdZ.]
+2024-04-13 19:01:37.043 TRACE 9144 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [BIGINT] - [5]
+2024-04-13 19:01:37.044 DEBUG 9144 --- [main] org.hibernate.SQL                        : 
+    insert 
+    into
+        users
+        (enable, password_id, role, username, id) 
+    values
+        (?, ?, ?, ?, ?)
+2024-04-13 19:01:37.044 TRACE 9144 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [BOOLEAN] - [true]
+2024-04-13 19:01:37.045 TRACE 9144 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [BIGINT] - [5]
+2024-04-13 19:01:37.045 TRACE 9144 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [STUDENT]
+2024-04-13 19:01:37.045 TRACE 9144 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [VARCHAR] - [student]
+2024-04-13 19:01:37.045 TRACE 9144 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [BIGINT] - [4]
+2024-04-13 19:01:46.213  INFO 9144 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-04-13 19:01:46.213  INFO 9144 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-04-13 19:01:46.214  INFO 9144 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-04-13 19:03:49.127  INFO 9144 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-04-13 19:03:49.128  INFO 9144 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-04-13 19:03:49.134  INFO 9144 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-04-13 19:03:56.563  INFO 7692 --- [main] dev.vorstuu.VorstuuApplication           : Starting VorstuuApplication using Java 1.8.0_402 on maxim with PID 7692 (D:\prod\angular_spring_project\vorstuu\build\classes\java\main started by maxim in D:\prod\angular_spring_project\vorstuu)
+2024-04-13 19:03:56.565 DEBUG 7692 --- [main] dev.vorstuu.VorstuuApplication           : Running with Spring Boot v2.7.8, Spring v5.3.25
+2024-04-13 19:03:56.566  INFO 7692 --- [main] dev.vorstuu.VorstuuApplication           : No active profile set, falling back to 1 default profile: "default"
+2024-04-13 19:03:57.080  INFO 7692 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-04-13 19:03:57.115  INFO 7692 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 28 ms. Found 2 JPA repository interfaces.
+2024-04-13 19:03:57.579  INFO 7692 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2024-04-13 19:03:57.585  INFO 7692 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-04-13 19:03:57.586  INFO 7692 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2024-04-13 19:03:57.669  INFO 7692 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-04-13 19:03:57.669  INFO 7692 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1069 ms
+2024-04-13 19:03:57.897  INFO 7692 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-04-13 19:03:57.933  INFO 7692 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.14.Final
+2024-04-13 19:03:58.049  INFO 7692 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-04-13 19:03:58.173  INFO 7692 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-04-13 19:03:58.313  INFO 7692 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-04-13 19:03:58.330  INFO 7692 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2024-04-13 19:03:58.715  INFO 7692 --- [main] org.hibernate.tuple.PojoInstantiator     : HHH000182: No default (no-argument) constructor for class: dev.vorstuu.entity.Password (class must be instantiated by Interceptor)
+2024-04-13 19:03:58.790 DEBUG 7692 --- [main] org.hibernate.SQL                        : 
+    
+    alter table if exists users 
+       drop constraint if exists FKqw3s5v74dceunv85ihgp26ag5
+2024-04-13 19:03:58.795 DEBUG 7692 --- [main] org.hibernate.SQL                        : 
+    
+    drop table if exists password cascade
+2024-04-13 19:03:58.798 DEBUG 7692 --- [main] org.hibernate.SQL                        : 
+    
+    drop table if exists students cascade
+2024-04-13 19:03:58.801 DEBUG 7692 --- [main] org.hibernate.SQL                        : 
+    
+    drop table if exists users cascade
+2024-04-13 19:03:58.812 DEBUG 7692 --- [main] org.hibernate.SQL                        : 
+    
+    drop sequence if exists hibernate_sequence
+2024-04-13 19:03:58.815 DEBUG 7692 --- [main] org.hibernate.SQL                        : create sequence hibernate_sequence start 1 increment 1
+2024-04-13 19:03:58.818 DEBUG 7692 --- [main] org.hibernate.SQL                        : 
+    
+    create table password (
+       id int8 not null,
+        password varchar(255),
+        primary key (id)
+    )
+2024-04-13 19:03:58.919 DEBUG 7692 --- [main] org.hibernate.SQL                        : 
+    
+    create table students (
+       id int8 not null,
+        fio varchar(255),
+        group_of_students varchar(255),
+        phone_number varchar(255),
+        primary key (id)
+    )
+2024-04-13 19:03:58.991 DEBUG 7692 --- [main] org.hibernate.SQL                        : 
+    
+    create table users (
+       id int8 not null,
+        enable boolean not null,
+        role varchar(255),
+        username varchar(255),
+        password_id int8 not null,
+        primary key (id)
+    )
+2024-04-13 19:03:59.099 DEBUG 7692 --- [main] org.hibernate.SQL                        : 
+    
+    alter table if exists users 
+       add constraint FKqw3s5v74dceunv85ihgp26ag5 
+       foreign key (password_id) 
+       references password
+2024-04-13 19:03:59.122  INFO 7692 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-04-13 19:03:59.143  INFO 7692 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-04-13 19:03:59.604 DEBUG 7692 --- [main] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/login/**']
+2024-04-13 19:03:59.610 DEBUG 7692 --- [main] edFilterInvocationSecurityMetadataSource : Adding web access control expression [hasAuthority('STUDENT')] for Ant [pattern='/api/base/students/**']
+2024-04-13 19:03:59.612 DEBUG 7692 --- [main] edFilterInvocationSecurityMetadataSource : Adding web access control expression [authenticated] for any request
+2024-04-13 19:03:59.626  INFO 7692 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@27358a19, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@8077c97, org.springframework.security.web.context.SecurityContextPersistenceFilter@aa752bb, org.springframework.security.web.header.HeaderWriterFilter@1e721583, org.springframework.security.web.authentication.logout.LogoutFilter@7574d4ad, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@65844c96, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@643ecfef, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2bb31455, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@22865072, org.springframework.security.web.session.SessionManagementFilter@7d401cdc, org.springframework.security.web.access.ExceptionTranslationFilter@1ccc1026, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1e120628]
+2024-04-13 19:03:59.687  WARN 7692 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-04-13 19:04:00.407  INFO 7692 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2024-04-13 19:04:00.415  INFO 7692 --- [main] dev.vorstuu.VorstuuApplication           : Started VorstuuApplication in 4.199 seconds (JVM running for 4.933)
+2024-04-13 19:04:00.435 DEBUG 7692 --- [main] org.hibernate.SQL                        : 
+    select
+        nextval ('hibernate_sequence')
+2024-04-13 19:04:00.461 DEBUG 7692 --- [main] org.hibernate.SQL                        : 
+    insert 
+    into
+        students
+        (fio, group_of_students, phone_number, id) 
+    values
+        (?, ?, ?, ?)
+2024-04-13 19:04:00.462 TRACE 7692 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [fio1]
+2024-04-13 19:04:00.462 TRACE 7692 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [VARCHAR] - [group1]
+2024-04-13 19:04:00.462 TRACE 7692 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [+7]
+2024-04-13 19:04:00.463 TRACE 7692 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [1]
+2024-04-13 19:04:00.469 DEBUG 7692 --- [main] org.hibernate.SQL                        : 
+    select
+        nextval ('hibernate_sequence')
+2024-04-13 19:04:00.470 DEBUG 7692 --- [main] org.hibernate.SQL                        : 
+    insert 
+    into
+        students
+        (fio, group_of_students, phone_number, id) 
+    values
+        (?, ?, ?, ?)
+2024-04-13 19:04:00.470 TRACE 7692 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [fio2]
+2024-04-13 19:04:00.470 TRACE 7692 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [VARCHAR] - [group2]
+2024-04-13 19:04:00.470 TRACE 7692 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [+71]
+2024-04-13 19:04:00.470 TRACE 7692 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [2]
+2024-04-13 19:04:00.471 DEBUG 7692 --- [main] org.hibernate.SQL                        : 
+    select
+        nextval ('hibernate_sequence')
+2024-04-13 19:04:00.472 DEBUG 7692 --- [main] org.hibernate.SQL                        : 
+    insert 
+    into
+        students
+        (fio, group_of_students, phone_number, id) 
+    values
+        (?, ?, ?, ?)
+2024-04-13 19:04:00.473 TRACE 7692 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [fio3]
+2024-04-13 19:04:00.473 TRACE 7692 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [VARCHAR] - [group3]
+2024-04-13 19:04:00.473 TRACE 7692 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [+72]
+2024-04-13 19:04:00.473 TRACE 7692 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [3]
+2024-04-13 19:04:00.557 DEBUG 7692 --- [main] org.hibernate.SQL                        : 
+    select
+        nextval ('hibernate_sequence')
+2024-04-13 19:04:00.558 DEBUG 7692 --- [main] org.hibernate.SQL                        : 
+    select
+        nextval ('hibernate_sequence')
+2024-04-13 19:04:00.560 DEBUG 7692 --- [main] org.hibernate.SQL                        : 
+    insert 
+    into
+        password
+        (password, id) 
+    values
+        (?, ?)
+2024-04-13 19:04:00.560 TRACE 7692 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [$2a$10$ghUqahU13hAzP5qitIqYEuzQ6hXYb2Pw4AEP3BxbUq9O57Gt1MpXu]
+2024-04-13 19:04:00.560 TRACE 7692 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [BIGINT] - [5]
+2024-04-13 19:04:00.561 DEBUG 7692 --- [main] org.hibernate.SQL                        : 
+    insert 
+    into
+        users
+        (enable, password_id, role, username, id) 
+    values
+        (?, ?, ?, ?, ?)
+2024-04-13 19:04:00.562 TRACE 7692 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [BOOLEAN] - [true]
+2024-04-13 19:04:00.562 TRACE 7692 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [BIGINT] - [5]
+2024-04-13 19:04:00.562 TRACE 7692 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [STUDENT]
+2024-04-13 19:04:00.562 TRACE 7692 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [VARCHAR] - [student]
+2024-04-13 19:04:00.562 TRACE 7692 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [BIGINT] - [4]
+2024-04-13 19:04:07.022  INFO 7692 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-04-13 19:04:07.022  INFO 7692 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-04-13 19:04:07.023  INFO 7692 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-04-13 19:04:07.030 DEBUG 7692 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing POST /api/login
+2024-04-13 19:04:07.034 DEBUG 7692 --- [http-nio-8080-exec-2] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2024-04-13 19:04:07.295 DEBUG 7692 --- [http-nio-8080-exec-2] .s.a.DefaultAuthenticationEventPublisher : No event was found for the exception org.springframework.security.authentication.InternalAuthenticationServiceException
+2024-04-13 19:04:07.299 DEBUG 7692 --- [http-nio-8080-exec-2] o.s.s.w.a.www.BasicAuthenticationFilter  : Failed to process authentication request
+
+org.springframework.security.authentication.InternalAuthenticationServiceException: PreparedStatementCallback; bad SQL grammar [select username, p.password as password, enable from users as u inner join passwords as p on u.password_id = p.id where username = ?]; nested exception is org.postgresql.util.PSQLException: ОШИБКА: отношение "passwords" не существует
+  Позиция: 76
+	at org.springframework.security.authentication.dao.DaoAuthenticationProvider.retrieveUser(DaoAuthenticationProvider.java:109) ~[spring-security-core-5.7.6.jar:5.7.6]
+	at org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider.authenticate(AbstractUserDetailsAuthenticationProvider.java:133) ~[spring-security-core-5.7.6.jar:5.7.6]
+	at org.springframework.security.authentication.ProviderManager.authenticate(ProviderManager.java:182) ~[spring-security-core-5.7.6.jar:5.7.6]
+	at org.springframework.security.authentication.ProviderManager.authenticate(ProviderManager.java:201) ~[spring-security-core-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:172) ~[spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) [spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) [spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103) [spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89) [spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) [spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) [spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) [spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) [spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) [spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:112) [spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:82) [spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) [spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55) [spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) [spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) [spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) [spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) [spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) [spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:221) [spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:186) [spring-security-web-5.7.6.jar:5.7.6]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354) [spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267) [spring-web-5.3.25.jar:5.3.25]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) [spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) [spring-web-5.3.25.jar:5.3.25]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) [spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) [spring-web-5.3.25.jar:5.3.25]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) [spring-web-5.3.25.jar:5.3.25]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) [spring-web-5.3.25.jar:5.3.25]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) [tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) [tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:177) [tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) [tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541) [tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) [tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) [tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360) [tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399) [tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) [tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:891) [tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1784) [tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) [tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) [tomcat-embed-core-9.0.71.jar:9.0.71]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.71.jar:9.0.71]
+	at java.lang.Thread.run(Thread.java:750) [na:1.8.0_402]
+Caused by: org.springframework.jdbc.BadSqlGrammarException: PreparedStatementCallback; bad SQL grammar [select username, p.password as password, enable from users as u inner join passwords as p on u.password_id = p.id where username = ?]; nested exception is org.postgresql.util.PSQLException: ОШИБКА: отношение "passwords" не существует
+  Позиция: 76
+	at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTranslate(SQLErrorCodeSQLExceptionTranslator.java:239) ~[spring-jdbc-5.3.25.jar:5.3.25]
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:70) ~[spring-jdbc-5.3.25.jar:5.3.25]
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1541) ~[spring-jdbc-5.3.25.jar:5.3.25]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:667) ~[spring-jdbc-5.3.25.jar:5.3.25]
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:713) ~[spring-jdbc-5.3.25.jar:5.3.25]
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:744) ~[spring-jdbc-5.3.25.jar:5.3.25]
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:757) ~[spring-jdbc-5.3.25.jar:5.3.25]
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:815) ~[spring-jdbc-5.3.25.jar:5.3.25]
+	at org.springframework.security.provisioning.JdbcUserDetailsManager.loadUsersByUsername(JdbcUserDetailsManager.java:177) ~[spring-security-core-5.7.6.jar:5.7.6]
+	at org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl.loadUserByUsername(JdbcDaoImpl.java:184) ~[spring-security-core-5.7.6.jar:5.7.6]
+	at org.springframework.security.authentication.dao.DaoAuthenticationProvider.retrieveUser(DaoAuthenticationProvider.java:94) ~[spring-security-core-5.7.6.jar:5.7.6]
+	... 56 common frames omitted
+Caused by: org.postgresql.util.PSQLException: ОШИБКА: отношение "passwords" не существует
+  Позиция: 76
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675) ~[postgresql-42.3.8.jar:42.3.8]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365) ~[postgresql-42.3.8.jar:42.3.8]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:355) ~[postgresql-42.3.8.jar:42.3.8]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:490) ~[postgresql-42.3.8.jar:42.3.8]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:408) ~[postgresql-42.3.8.jar:42.3.8]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:167) ~[postgresql-42.3.8.jar:42.3.8]
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:119) ~[postgresql-42.3.8.jar:42.3.8]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeQuery(ProxyPreparedStatement.java:52) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeQuery(HikariProxyPreparedStatement.java) ~[HikariCP-4.0.3.jar:na]
+	at org.springframework.jdbc.core.JdbcTemplate$1.doInPreparedStatement(JdbcTemplate.java:722) ~[spring-jdbc-5.3.25.jar:5.3.25]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:651) ~[spring-jdbc-5.3.25.jar:5.3.25]
+	... 63 common frames omitted
+
+2024-04-13 19:04:07.301 DEBUG 7692 --- [http-nio-8080-exec-2] w.c.HttpSessionSecurityContextRepository : Did not store empty SecurityContext
+2024-04-13 19:04:07.301 DEBUG 7692 --- [http-nio-8080-exec-2] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2024-04-13 19:06:27.437  INFO 7692 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-04-13 19:06:27.439  INFO 7692 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-04-13 19:06:27.547  INFO 7692 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-04-13 19:06:35.019  INFO 11480 --- [main] dev.vorstuu.VorstuuApplication           : Starting VorstuuApplication using Java 1.8.0_402 on maxim with PID 11480 (D:\prod\angular_spring_project\vorstuu\build\classes\java\main started by maxim in D:\prod\angular_spring_project\vorstuu)
+2024-04-13 19:06:35.021 DEBUG 11480 --- [main] dev.vorstuu.VorstuuApplication           : Running with Spring Boot v2.7.8, Spring v5.3.25
+2024-04-13 19:06:35.022  INFO 11480 --- [main] dev.vorstuu.VorstuuApplication           : No active profile set, falling back to 1 default profile: "default"
+2024-04-13 19:06:35.572  INFO 11480 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-04-13 19:06:35.615  INFO 11480 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 35 ms. Found 2 JPA repository interfaces.
+2024-04-13 19:06:36.090  INFO 11480 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2024-04-13 19:06:36.097  INFO 11480 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-04-13 19:06:36.098  INFO 11480 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2024-04-13 19:06:36.183  INFO 11480 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-04-13 19:06:36.183  INFO 11480 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1125 ms
+2024-04-13 19:06:36.413  INFO 11480 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-04-13 19:06:36.448  INFO 11480 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.14.Final
+2024-04-13 19:06:36.563  INFO 11480 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-04-13 19:06:36.690  INFO 11480 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-04-13 19:06:36.834  INFO 11480 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-04-13 19:06:36.852  INFO 11480 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2024-04-13 19:06:37.265  INFO 11480 --- [main] org.hibernate.tuple.PojoInstantiator     : HHH000182: No default (no-argument) constructor for class: dev.vorstuu.entity.Password (class must be instantiated by Interceptor)
+2024-04-13 19:06:37.347 DEBUG 11480 --- [main] org.hibernate.SQL                        : 
+    
+    alter table if exists users 
+       drop constraint if exists FKqw3s5v74dceunv85ihgp26ag5
+2024-04-13 19:06:37.364 DEBUG 11480 --- [main] org.hibernate.SQL                        : 
+    
+    drop table if exists password cascade
+2024-04-13 19:06:37.368 DEBUG 11480 --- [main] org.hibernate.SQL                        : 
+    
+    drop table if exists students cascade
+2024-04-13 19:06:37.371 DEBUG 11480 --- [main] org.hibernate.SQL                        : 
+    
+    drop table if exists users cascade
+2024-04-13 19:06:37.375 DEBUG 11480 --- [main] org.hibernate.SQL                        : 
+    
+    drop sequence if exists hibernate_sequence
+2024-04-13 19:06:37.378 DEBUG 11480 --- [main] org.hibernate.SQL                        : create sequence hibernate_sequence start 1 increment 1
+2024-04-13 19:06:37.393 DEBUG 11480 --- [main] org.hibernate.SQL                        : 
+    
+    create table password (
+       id int8 not null,
+        password varchar(255),
+        primary key (id)
+    )
+2024-04-13 19:06:37.600 DEBUG 11480 --- [main] org.hibernate.SQL                        : 
+    
+    create table students (
+       id int8 not null,
+        fio varchar(255),
+        group_of_students varchar(255),
+        phone_number varchar(255),
+        primary key (id)
+    )
+2024-04-13 19:06:37.679 DEBUG 11480 --- [main] org.hibernate.SQL                        : 
+    
+    create table users (
+       id int8 not null,
+        enable boolean not null,
+        role varchar(255),
+        username varchar(255),
+        password_id int8 not null,
+        primary key (id)
+    )
+2024-04-13 19:06:37.795 DEBUG 11480 --- [main] org.hibernate.SQL                        : 
+    
+    alter table if exists users 
+       add constraint FKqw3s5v74dceunv85ihgp26ag5 
+       foreign key (password_id) 
+       references password
+2024-04-13 19:06:37.801  INFO 11480 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-04-13 19:06:37.810  INFO 11480 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-04-13 19:06:38.320 DEBUG 11480 --- [main] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/login/**']
+2024-04-13 19:06:38.325 DEBUG 11480 --- [main] edFilterInvocationSecurityMetadataSource : Adding web access control expression [hasAuthority('STUDENT')] for Ant [pattern='/api/base/students/**']
+2024-04-13 19:06:38.327 DEBUG 11480 --- [main] edFilterInvocationSecurityMetadataSource : Adding web access control expression [authenticated] for any request
+2024-04-13 19:06:38.343  INFO 11480 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6e0d16a4, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7e18ced7, org.springframework.security.web.context.SecurityContextPersistenceFilter@3c16528d, org.springframework.security.web.header.HeaderWriterFilter@541d4d9f, org.springframework.security.web.authentication.logout.LogoutFilter@27bc1d44, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@8077c97, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@389a5022, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5b44318, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@305b43ca, org.springframework.security.web.session.SessionManagementFilter@643ecfef, org.springframework.security.web.access.ExceptionTranslationFilter@1e721583, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@dc1fadd]
+2024-04-13 19:06:38.406  WARN 11480 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-04-13 19:06:39.170  INFO 11480 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2024-04-13 19:06:39.178  INFO 11480 --- [main] dev.vorstuu.VorstuuApplication           : Started VorstuuApplication in 4.502 seconds (JVM running for 5.224)
+2024-04-13 19:06:39.198 DEBUG 11480 --- [main] org.hibernate.SQL                        : 
+    select
+        nextval ('hibernate_sequence')
+2024-04-13 19:06:39.224 DEBUG 11480 --- [main] org.hibernate.SQL                        : 
+    insert 
+    into
+        students
+        (fio, group_of_students, phone_number, id) 
+    values
+        (?, ?, ?, ?)
+2024-04-13 19:06:39.225 TRACE 11480 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [fio1]
+2024-04-13 19:06:39.225 TRACE 11480 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [VARCHAR] - [group1]
+2024-04-13 19:06:39.225 TRACE 11480 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [+7]
+2024-04-13 19:06:39.226 TRACE 11480 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [1]
+2024-04-13 19:06:39.236 DEBUG 11480 --- [main] org.hibernate.SQL                        : 
+    select
+        nextval ('hibernate_sequence')
+2024-04-13 19:06:39.237 DEBUG 11480 --- [main] org.hibernate.SQL                        : 
+    insert 
+    into
+        students
+        (fio, group_of_students, phone_number, id) 
+    values
+        (?, ?, ?, ?)
+2024-04-13 19:06:39.237 TRACE 11480 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [fio2]
+2024-04-13 19:06:39.237 TRACE 11480 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [VARCHAR] - [group2]
+2024-04-13 19:06:39.237 TRACE 11480 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [+71]
+2024-04-13 19:06:39.238 TRACE 11480 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [2]
+2024-04-13 19:06:39.239 DEBUG 11480 --- [main] org.hibernate.SQL                        : 
+    select
+        nextval ('hibernate_sequence')
+2024-04-13 19:06:39.239 DEBUG 11480 --- [main] org.hibernate.SQL                        : 
+    insert 
+    into
+        students
+        (fio, group_of_students, phone_number, id) 
+    values
+        (?, ?, ?, ?)
+2024-04-13 19:06:39.239 TRACE 11480 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [fio3]
+2024-04-13 19:06:39.239 TRACE 11480 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [VARCHAR] - [group3]
+2024-04-13 19:06:39.240 TRACE 11480 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [+72]
+2024-04-13 19:06:39.240 TRACE 11480 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [BIGINT] - [3]
+2024-04-13 19:06:39.325 DEBUG 11480 --- [main] org.hibernate.SQL                        : 
+    select
+        nextval ('hibernate_sequence')
+2024-04-13 19:06:39.326 DEBUG 11480 --- [main] org.hibernate.SQL                        : 
+    select
+        nextval ('hibernate_sequence')
+2024-04-13 19:06:39.328 DEBUG 11480 --- [main] org.hibernate.SQL                        : 
+    insert 
+    into
+        password
+        (password, id) 
+    values
+        (?, ?)
+2024-04-13 19:06:39.329 TRACE 11480 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [$2a$10$1/NqkOy6OZJzwCmhfPetMOPUZ5rATCA4BGccirshk7ZuwvbzSZl92]
+2024-04-13 19:06:39.329 TRACE 11480 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [BIGINT] - [5]
+2024-04-13 19:06:39.330 DEBUG 11480 --- [main] org.hibernate.SQL                        : 
+    insert 
+    into
+        users
+        (enable, password_id, role, username, id) 
+    values
+        (?, ?, ?, ?, ?)
+2024-04-13 19:06:39.330 TRACE 11480 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [BOOLEAN] - [true]
+2024-04-13 19:06:39.330 TRACE 11480 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [BIGINT] - [5]
+2024-04-13 19:06:39.330 TRACE 11480 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [STUDENT]
+2024-04-13 19:06:39.330 TRACE 11480 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [VARCHAR] - [student]
+2024-04-13 19:06:39.331 TRACE 11480 --- [main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [BIGINT] - [4]
+2024-04-13 19:06:44.808  INFO 11480 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-04-13 19:06:44.809  INFO 11480 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-04-13 19:06:44.810  INFO 11480 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-04-13 19:06:44.817 DEBUG 11480 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing POST /api/login
+2024-04-13 19:06:44.821 DEBUG 11480 --- [http-nio-8080-exec-1] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2024-04-13 19:06:45.129 DEBUG 11480 --- [http-nio-8080-exec-1] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+2024-04-13 19:06:45.130 DEBUG 11480 --- [http-nio-8080-exec-1] o.s.s.w.a.www.BasicAuthenticationFilter  : Set SecurityContextHolder to UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=student, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[STUDENT]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[STUDENT]]
+2024-04-13 19:06:45.135 DEBUG 11480 --- [http-nio-8080-exec-1] w.c.HttpSessionSecurityContextRepository : Created HttpSession as SecurityContext is non-default
+2024-04-13 19:06:45.135 DEBUG 11480 --- [http-nio-8080-exec-1] w.c.HttpSessionSecurityContextRepository : Stored SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=student, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[STUDENT]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[STUDENT]]] to HttpSession [org.apache.catalina.session.StandardSessionFacade@66339236]
+2024-04-13 19:06:45.141 DEBUG 11480 --- [http-nio-8080-exec-1] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [POST /api/login] with attributes [permitAll]
+2024-04-13 19:06:45.141 DEBUG 11480 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured POST /api/login
+2024-04-13 19:06:45.153  INFO 11480 --- [http-nio-8080-exec-1] d.v.controllers.AuthorizationController  : Login user
+2024-04-13 19:06:45.153  INFO 11480 --- [http-nio-8080-exec-1] d.v.controllers.AuthorizationController  : Hello student with role [STUDENT]
+2024-04-13 19:06:45.187 DEBUG 11480 --- [http-nio-8080-exec-1] w.c.HttpSessionSecurityContextRepository : Stored SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=student, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[STUDENT]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[STUDENT]]] to HttpSession [org.apache.catalina.session.StandardSessionFacade@66339236]
+2024-04-13 19:06:45.187 DEBUG 11480 --- [http-nio-8080-exec-1] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2024-04-13 19:09:52.206 DEBUG 11480 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/base/students
+2024-04-13 19:09:52.206 DEBUG 11480 --- [http-nio-8080-exec-3] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2024-04-13 19:09:52.206 DEBUG 11480 --- [http-nio-8080-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2024-04-13 19:09:52.225 DEBUG 11480 --- [http-nio-8080-exec-3] o.s.s.w.a.i.FilterSecurityInterceptor    : Failed to authorize filter invocation [GET /api/base/students] with attributes [hasAuthority('STUDENT')]
+2024-04-13 19:09:52.233 DEBUG 11480 --- [http-nio-8080-exec-3] o.s.s.w.s.HttpSessionRequestCache        : Saved request http://localhost:8080/api/base/students to session
+2024-04-13 19:09:52.233 DEBUG 11480 --- [http-nio-8080-exec-3] w.c.HttpSessionSecurityContextRepository : Did not store empty SecurityContext
+2024-04-13 19:09:52.233 DEBUG 11480 --- [http-nio-8080-exec-3] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2024-04-13 19:10:00.736 DEBUG 11480 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/base/students
+2024-04-13 19:10:00.737 DEBUG 11480 --- [http-nio-8080-exec-5] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2024-04-13 19:10:00.737 DEBUG 11480 --- [http-nio-8080-exec-5] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2024-04-13 19:10:00.737 DEBUG 11480 --- [http-nio-8080-exec-5] o.s.s.w.a.i.FilterSecurityInterceptor    : Failed to authorize filter invocation [GET /api/base/students] with attributes [hasAuthority('STUDENT')]
+2024-04-13 19:10:00.738 DEBUG 11480 --- [http-nio-8080-exec-5] o.s.s.w.s.HttpSessionRequestCache        : Saved request http://localhost:8080/api/base/students to session
+2024-04-13 19:10:00.738 DEBUG 11480 --- [http-nio-8080-exec-5] w.c.HttpSessionSecurityContextRepository : Did not store empty SecurityContext
+2024-04-13 19:10:00.738 DEBUG 11480 --- [http-nio-8080-exec-5] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2024-04-13 19:10:54.359  INFO 11480 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-04-13 19:10:54.361  INFO 11480 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-04-13 19:10:54.367  INFO 11480 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
